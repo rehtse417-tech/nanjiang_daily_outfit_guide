@@ -1,0 +1,296 @@
+
+<style>
+* { box-sizing: border-box; }
+.wrap { padding: 12px 0 20px; font-size: 14px; color: var(--color-text-primary); }
+.zone-title { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--color-text-tertiary); margin: 20px 0 8px; padding-bottom: 5px; border-bottom: 1px solid var(--color-border-tertiary); }
+.day-card { border: 1px solid var(--color-border-tertiary); border-radius: 12px; margin-bottom: 8px; overflow: hidden; cursor: pointer; transition: border-color .15s; }
+.day-card:hover { border-color: var(--color-border-secondary); }
+.day-header { display: flex; align-items: center; gap: 10px; padding: 10px 14px; }
+.day-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; }
+.day-loc { font-size: 13px; font-weight: 500; flex: 1; }
+.day-temp { font-size: 12px; color: var(--color-text-secondary); white-space: nowrap; }
+.day-weather-icon { font-size: 14px; }
+.chevron { font-size: 10px; color: var(--color-text-tertiary); transition: transform .2s; }
+.day-card.open .chevron { transform: rotate(90deg); }
+.day-body { display: none; padding: 0 14px 14px; border-top: 1px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+.day-card.open .day-body { display: block; }
+.outfit-section { margin-top: 10px; }
+.outfit-row { display: flex; gap: 12px; margin-bottom: 6px; align-items: flex-start; }
+.outfit-label { font-size: 11px; color: var(--color-text-tertiary); min-width: 36px; padding-top: 1px; }
+.outfit-items { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag { display: inline-block; font-size: 12px; padding: 2px 9px; border-radius: 20px; white-space: nowrap; }
+.tag-blue { background: var(--color-background-info); color: var(--color-text-info); }
+.tag-warm { background: #FAEEDA; color: #854F0B; }
+.tag-gray { background: var(--color-background-secondary); color: var(--color-text-secondary); border: 1px solid var(--color-border-tertiary); }
+.tag-red { background: #FCEBEB; color: #A32D2D; }
+.tag-green { background: #EAF3DE; color: #3B6D11; }
+.tip { font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; padding: 7px 10px; background: var(--color-background-tertiary); border-radius: 8px; line-height: 1.6; }
+.tip strong { color: var(--color-text-primary); font-weight: 500; }
+/* zone color badges */
+.b-north { background: #B5D4F4; color: #0C447C; }
+.b-south { background: #FAC775; color: #633806; }
+.b-pamir { background: #AFA9EC; color: #3C3489; }
+.b-city { background: #9FE1CB; color: #085041; }
+.b-return { background: #C0DD97; color: #3B6D11; }
+@media (prefers-color-scheme: dark) {
+  .b-north { background: #0C447C; color: #B5D4F4; }
+  .b-south { background: #633806; color: #FAC775; }
+  .b-pamir { background: #3C3489; color: #CECBF6; }
+  .b-city { background: #085041; color: #9FE1CB; }
+  .b-return { background: #3B6D11; color: #C0DD97; }
+  .tag-warm { background: #412402; color: #FAC775; }
+  .tag-red { background: #501313; color: #F09595; }
+  .tag-green { background: #173404; color: #97C459; }
+}
+</style>
+<div class="wrap">
+
+<div class="zone-title">❄️ 第一段 · 北疆 — 乌鲁木齐</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-north">3/20 周五</span>
+    <span class="day-weather-icon">☁️</span>
+    <span class="day-loc">乌鲁木齐 · 接风宴、博物馆、大巴扎</span>
+    <span class="day-temp">-2 ~ 8°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-red">保暖内衣套装</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">中层</span><div class="outfit-items"><span class="tag tag-blue">厚毛衣 / 抓绒</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-blue">羽绒服</span><span class="tag tag-gray">冲锋衣（挡风）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-red">秋裤</span><span class="tag tag-gray">厚休闲裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">毛线帽</span><span class="tag tag-warm">手套</span><span class="tag tag-warm">围巾</span><span class="tag tag-gray">运动鞋</span></div></div>
+    </div>
+    <div class="tip">接风宴室内暖和，可在抵达后脱去羽绒服。乌鲁木齐这个时节寒潮后回温，<strong>晚间出行一定要套上羽绒服</strong>。</div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-north">3/21 周六</span>
+    <span class="day-weather-icon">🌤️</span>
+    <span class="day-loc">乌鲁木齐 → 博斯腾湖 → 尉犁</span>
+    <span class="day-temp">0 ~ 12°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-red">保暖内衣（上衣）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">中层</span><div class="outfit-items"><span class="tag tag-blue">抓绒 / 卫衣</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-blue">羽绒服</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-gray">运动长裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">围巾</span><span class="tag tag-warm">太阳镜</span><span class="tag tag-gray">运动鞋</span></div></div>
+    </div>
+    <div class="tip">从乌鲁木齐向南疆行进，气温逐渐回升。湖边<strong>风大</strong>，围巾必须戴；下午到尉犁盆地后气温明显升高，羽绒服可以放进车里备用。</div>
+  </div>
+</div>
+
+<div class="zone-title">🏜️ 第二段 · 南疆盆地 — 塔克拉玛干边缘</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-south">3/22 周日</span>
+    <span class="day-weather-icon">☀️</span>
+    <span class="day-loc">尉犁 → 罗布人村寨 → 龟兹小巷 → 库车</span>
+    <span class="day-temp">8 ~ 20°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-gray">长袖T恤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">中层</span><div class="outfit-items"><span class="tag tag-blue">薄卫衣（早晚备用）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-gray">冲锋衣（防沙）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-gray">休闲长裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">太阳镜 必带</span><span class="tag tag-warm">围巾/脖套</span><span class="tag tag-warm">防晒霜SPF50+</span></div></div>
+    </div>
+    <div class="tip">白天可达20°C，感受到"真正的南疆"。龟兹小巷、库车大馕都是户外游逛，<strong>防晒从这天起要认真涂</strong>，新疆紫外线比内地强很多。沙漠边缘偶有扬沙，围巾备好。</div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-south">3/23 周一</span>
+    <span class="day-weather-icon">⛅</span>
+    <span class="day-loc">库车 → 温宿大峡谷 → 阿克苏</span>
+    <span class="day-temp">8 ~ 17°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-gray">长袖T恤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-blue">抓绒 / 卫衣</span><span class="tag tag-gray">冲锋衣</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-gray">休闲长裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">运动鞋（防滑）</span><span class="tag tag-warm">太阳镜</span><span class="tag tag-warm">防晒霜</span></div></div>
+    </div>
+    <div class="tip">温宿大峡谷是自驾游览，峡谷内风道明显，<strong>冲锋衣很关键</strong>。峡谷内早上阴凉，中午岩石晒热后温度升得快，洋葱穿法方便增减。</div>
+  </div>
+</div>
+
+<div class="zone-title">🕌 第三段 · 喀什古城 — 市区游览</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-city">3/24 周二</span>
+    <span class="day-weather-icon">☀️</span>
+    <span class="day-loc">阿克苏 → 喀什古城初体验</span>
+    <span class="day-temp">10 ~ 21°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-gray">长袖T恤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-gray">轻薄卫衣 / 长袖外套</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-gray">舒适休闲裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">太阳镜</span><span class="tag tag-warm">防晒帽</span><span class="tag tag-warm">围巾备用（沙尘）</span></div></div>
+    </div>
+    <div class="tip">到喀什了！白天温暖舒适，是行程里最好穿的几天之一。彩虹巷、布袋巷适合拍照，<strong>选颜色好看的长袖T</strong>，背景太美了。喀什春季偶有沙尘暴，出门前查一下预警。</div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-city">3/25 周三</span>
+    <span class="day-weather-icon">☀️🌬️</span>
+    <span class="day-loc">喀什深度游 · 办边防证</span>
+    <span class="day-temp">10 ~ 21°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-gray">长袖T或短袖T（白天可换）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-gray">冲锋衣（防沙尘）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-gray">休闲裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">围巾（沙尘保护）</span><span class="tag tag-warm">太阳镜</span></div></div>
+    </div>
+    <div class="tip">这天要<strong>办理边防证</strong>（当天用到），古城开城仪式早起出门注意早晚温差。香妃园、百年老茶馆下午茶是休闲行程，穿着轻便舒适即可。<strong>晚上把明天的保暖装备整理好</strong>，后天要进帕米尔了。</div>
+  </div>
+</div>
+
+<div class="zone-title">🏔️ 第四段 · 喀喇昆仑 & 帕米尔高原 — 最冷最壮美</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-pamir">3/26 周四</span>
+    <span class="day-weather-icon">🌨️</span>
+    <span class="day-loc">喀什 → 雪山公路 → 白沙湖 → 喀拉库勒湖 → 慕士塔格 → 塔县</span>
+    <span class="day-temp">-5 ~ 6°C（高原）</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-red">保暖内衣套装 全套</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">中层</span><div class="outfit-items"><span class="tag tag-blue">厚毛衣</span><span class="tag tag-blue">抓绒</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-red">羽绒服</span><span class="tag tag-gray">冲锋衣（防风）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-red">秋裤</span><span class="tag tag-gray">厚户外裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-red">厚手套 必带</span><span class="tag tag-warm">毛线帽压耳</span><span class="tag tag-warm">口罩/围脖</span><span class="tag tag-warm">偏光太阳镜</span></div></div>
+    </div>
+    <div class="tip"><strong>全程最重要的一天</strong>——从喀什海拔1300m一路攀升至白沙湖4100m、慕士塔格山脚4600m+。海拔越高气温越低，高原紫外线是平原的数倍，<strong>偏光太阳镜不带会出问题</strong>。白沙湖风极大，所有层次都穿上，一件不能少。</div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-pamir">3/27 周五</span>
+    <span class="day-weather-icon">❄️</span>
+    <span class="day-loc">塔县 → 红其拉甫国门 → 瓦罕走廊 → 班迪尔蓝湖</span>
+    <span class="day-temp">-10 ~ 3°C（最冷一天）</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-red">保暖内衣套装</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">中层</span><div class="outfit-items"><span class="tag tag-blue">厚毛衣</span><span class="tag tag-blue">抓绒</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-red">羽绒服</span><span class="tag tag-gray">冲锋衣</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-red">秋裤</span><span class="tag tag-gray">厚户外裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-red">厚手套</span><span class="tag tag-red">帽子+口罩 全套</span><span class="tag tag-warm">暖宝宝建议带</span></div></div>
+    </div>
+    <div class="tip">红其拉甫国门海拔4733m，是行程最高点，也是<strong>最冷的一天</strong>。瓦罕走廊风道强劲，即使阳光好体感依然极寒。暖宝宝贴在腰部和脚底很有效。<strong>拍照时手机电量掉很快，放内袋保暖</strong>。</div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-pamir">3/28 周六</span>
+    <span class="day-weather-icon">🌤️</span>
+    <span class="day-loc">塔县 → 杏花村 → 帕米尔之眼 → 塔合曼湿地 → 白沙湖</span>
+    <span class="day-temp">-5 ~ 10°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">内层</span><div class="outfit-items"><span class="tag tag-red">保暖内衣（上衣）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">中层</span><div class="outfit-items"><span class="tag tag-blue">抓绒 / 毛衣</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-red">羽绒服</span><span class="tag tag-gray">冲锋衣</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-gray">厚长裤（秋裤可选）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">手套</span><span class="tag tag-warm">帽子</span><span class="tag tag-warm">围脖</span><span class="tag tag-warm">偏光镜</span></div></div>
+    </div>
+    <div class="tip"><strong>杏花村</strong>是帕米尔河谷，海拔约2000m，白天比昨天暖和很多，杏花与雪花共存，适合留出时间好好拍照。帕米尔之眼和塔合曼湿地会有风，外层还是要带着。</div>
+  </div>
+</div>
+
+<div class="zone-title">🌸 第五段 · 从高原下山 — 莎车 & 返回喀什</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-south">3/29 周日</span>
+    <span class="day-weather-icon">🌤️</span>
+    <span class="day-loc">白沙湖 → 木吉火山口 → 奥依塔克红山 → 莎车</span>
+    <span class="day-temp">-2 ~ 18°C（海拔一路下降）</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">出发</span><div class="outfit-items"><span class="tag tag-red">羽绒服+冲锋衣 全套</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下山后</span><div class="outfit-items"><span class="tag tag-blue">卸掉羽绒，保留抓绒+冲锋衣</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">到莎车</span><div class="outfit-items"><span class="tag tag-gray">长袖T + 薄外套即可</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-gray">长裤（全天）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">太阳镜</span><span class="tag tag-warm">防晒霜</span></div></div>
+    </div>
+    <div class="tip">今天是"换装进度条"最长的一天，从-2°C一路驾车下降到18°C。<strong>建议把衣服叠好放车座旁</strong>，随时可以脱。白沙湖日出要早起，出门时全套保暖必穿。到莎车就可以切换春日模式了。</div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-return">3/30 周一</span>
+    <span class="day-weather-icon">🌸</span>
+    <span class="day-loc">莎车 → 万亩巴旦木花 → N39沙漠 → 喀什</span>
+    <span class="day-temp">12 ~ 22°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">上衣</span><div class="outfit-items"><span class="tag tag-green">短袖T / 长袖T（拍照友好）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">外层</span><div class="outfit-items"><span class="tag tag-gray">薄外套（早晚用）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">下装</span><div class="outfit-items"><span class="tag tag-gray">休闲裤</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">配件</span><div class="outfit-items"><span class="tag tag-warm">太阳镜</span><span class="tag tag-warm">防晒帽</span><span class="tag tag-warm">防晒霜</span></div></div>
+    </div>
+    <div class="tip">庆功宴！<strong>这天是拍照最多的一天</strong>——万亩巴旦木花粉白一片，N39沙漠金黄，光线绝美。选颜色鲜艳好看的T恤，和花海相得益彰。温度最接近"春天"，尽情享受吧。</div>
+  </div>
+</div>
+
+<div class="day-card" onclick="toggle(this)">
+  <div class="day-header">
+    <span class="day-badge b-return">3/31 周二</span>
+    <span class="day-weather-icon">✈️</span>
+    <span class="day-loc">喀什 → 送机 · 返程</span>
+    <span class="day-temp">10 ~ 20°C</span>
+    <span class="chevron">▶</span>
+  </div>
+  <div class="day-body">
+    <div class="outfit-section">
+      <div class="outfit-row"><span class="outfit-label">穿搭</span><div class="outfit-items"><span class="tag tag-gray">舒适旅行服（行李箱里最顺手的那套）</span></div></div>
+      <div class="outfit-row"><span class="outfit-label">备注</span><div class="outfit-items"><span class="tag tag-blue">羽绒服建议放手提行李</span><span class="tag tag-gray">机场安检轻便为主</span></div></div>
+    </div>
+    <div class="tip">送机返程，把所有大件装进行李箱托运。飞机上温度波动大，<strong>冲锋衣或薄抓绒可以随身带一件</strong>备用。</div>
+  </div>
+</div>
+
+</div>
+<script>
+function toggle(el) {
+  el.classList.toggle('open');
+}
+</script>
